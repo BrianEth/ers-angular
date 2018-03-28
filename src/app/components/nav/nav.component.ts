@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+  logout() :void {
+    window.sessionStorage.setItem('loggedUser', null);
+    window.sessionStorage.setItem('userFirstName', null);
+  }
+
 }

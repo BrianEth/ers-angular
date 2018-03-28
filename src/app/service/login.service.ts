@@ -10,16 +10,19 @@ import { User } from '../models/user.model';
 
 
 @Injectable()
-export class ErsService {
+export class LoginService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    window.sessionStorage.setItem('loggedUser', null);
+    window.sessionStorage.setItem('userFirstName', null);
+   }
 
   public login(username: string, password: string): Observable<User> {
     
 
-   const options = username ? {params: new HttpParams().set('username', username)} :  password ? {params: new HttpParams().set('password', password)}  : {} ;
-   // let postData = JSON.stringify(username);
-    //window.alert(username);
+   const options = username ? {params: new HttpParams().set('username', username)} 
+   :  password ? {params: new HttpParams().set('password', password)}  : {} ;
+   
     return this.http
             .post(`http://localhost:8080/ERS/login.do?username=${username}&password=${password}`,
              null, {params: options} )
@@ -28,6 +31,9 @@ export class ErsService {
             })
             .catch(this.handleError);
   }
+
+  
+
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);

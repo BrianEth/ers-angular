@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 
 //service
-import { ErsService } from '../../service/ers.service';
+import { LoginService } from '../../service/login.service';
 import { User } from '../../models/user.model';
 import { RouterLink, Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { RouterLink, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   title='login';
 
-  constructor(private ersService: ErsService, private router : Router) {
+  constructor(private loginService: LoginService, private router : Router) {
     this.router = router;
    }
 
@@ -25,12 +25,15 @@ export class LoginComponent implements OnInit {
   tryLogin(): void{
     document.getElementById("username").setAttribute("disabled","disabled");
     document.getElementById("password").setAttribute("disabled","disabled");
-    this.ersService.login(this.user.username,this.user.password)
+    this.loginService.login(this.user.username,this.user.password)
     .subscribe(
       mappedUser => { 
         this.user = mappedUser;
         console.log(mappedUser);
         if(this.user.firstName){
+          window.sessionStorage.setItem('loggedUser', this.user.username);
+          window.sessionStorage.setItem('userFirstName', this.user.firstName);
+
           this.router.navigate(['/main']);
         }else {
           console.log("login failed");

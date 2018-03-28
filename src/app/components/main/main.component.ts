@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-    title = 'Welcome Reimbursement Services';
+    title = 'Welcome to Reimbursement Services';
+    userFirstName = window.sessionStorage.getItem('userFirstName');
     //image = 'assets/images/angular.png';
 }
