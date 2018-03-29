@@ -3,16 +3,24 @@
     <div>
       <div>
         Please indicate the amount you want to request is reimbursed.
-        <input placeholder="amount"/>
+        <input [(ngModel)]=reimbursement.amount placeholder="amount" required/>
       </div>
       <div>
         Please give a brief description of why this should be reimbursed.
-        <input placeholder="description"/>
+        <input [(ngModel)]=reimbursement.description placeholder="description" required/>
       </div>
       <div>
         TODO: drop-down for different types.
-        <!--<a class = "dropdown-menu">
-        <!--type dropdown -->
+
+        <label for="type">Reimbursement Type</label>
+          <select [(ngModel)]=reimbursement.type class="form-control" id="type" required>
+            <option  *ngFor="let ty of types" [value]="ty">{{ty}}</option>
+          </select>
+           <!-- TODO: delete. -->
+
       </div>
+        <button type="submit" class="btn btn-success" (click)=trySubmit()>Submit</button>
+      
     </div>
+    Currently logged in as: {{userFirstName}}
 </div>

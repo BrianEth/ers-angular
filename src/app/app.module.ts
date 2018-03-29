@@ -22,6 +22,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginService } from './service/login.service';
 import { ReimbursementService } from './service/reimbursement.service';
 import { EmployeeService } from './service/employee.service';
+//import { NoopInterceptor } from '@angular/common/http';
+
+//import { AuthInterceptor } from './service/auth.service';
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import { EmployeeService } from './service/employee.service';
     HistoryComponent,
     PendingComponent,
     ResolvedComponent,
+   // NoopInterceptor,
     ProfileComponent
   ],
   imports: [
@@ -42,6 +46,7 @@ import { EmployeeService } from './service/employee.service';
     FormsModule,
     HttpModule
   ],
+  
   providers: [LoginService, ReimbursementService, EmployeeService],
   bootstrap: [AppComponent]
 })

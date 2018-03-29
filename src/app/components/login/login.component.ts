@@ -26,14 +26,18 @@ export class LoginComponent implements OnInit {
     document.getElementById("username").setAttribute("disabled","disabled");
     document.getElementById("password").setAttribute("disabled","disabled");
     this.loginService.login(this.user.username,this.user.password)
-    .subscribe(
+    .subscribe( 
       mappedUser => { 
         this.user = mappedUser;
         console.log(mappedUser);
         if(this.user.firstName){
           window.sessionStorage.setItem('loggedUser', this.user.username);
           window.sessionStorage.setItem('userFirstName', this.user.firstName);
-
+          window.sessionStorage.setItem('userLastName',this.user.lastName);
+          window.sessionStorage.setItem('userEmail',this.user.email);
+          window.sessionStorage.setItem('userRoleNum','1');
+          window.sessionStorage.setItem('userRole',this.user.employeeRole.type);
+         // window.sessionStorage.setItem('loggedUser', this.user.);
           this.router.navigate(['/main']);
         }else {
           console.log("login failed");

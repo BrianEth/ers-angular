@@ -23,10 +23,10 @@ export class ReimbursementService {
     const options = amount ? {params: new HttpParams().set('amount', amount.toString())}
      : description ? {params: new HttpParams().set('description', description)} 
      : type ? {params: new HttpParams().set('type', type.toString())} : {};
+     console.log(options);
  
      return this.http
-             .post(`http://localhost:8080/ERS/login.do?amount=${amount}&description=${description}&type=${type}`,
-             null, {params: options} )
+             .post(`http://localhost:8080/ERS/submitReimbursement.do?amount=${amount}&description=${description}&type=${type}`,null)
              .map((response: Response) => {
                return <Reimbursement> response.json();
              })

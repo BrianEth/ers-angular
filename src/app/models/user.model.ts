@@ -5,7 +5,7 @@ export class User {
     username: string;
     password: string;
     firstName: string;
-    lastnName: string;
+    lastName: string;
     email: string;
     employeeRole: EmployeeRole;
 
@@ -15,7 +15,7 @@ export class User {
 
         //mapped from api?
         this.firstName = firstname;
-        this.lastnName = lastname;
+        this.lastName = lastname;
         this.email= lastname;
         this.employeeRole = employeeRole
     }

@@ -2,12 +2,12 @@
 	<div class="container-fluid">
 		
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/"><strong>ERS</strong></a>
+				<a class="navbar-brand" routerLink="/main"><strong>ERS Home</strong></a>
 			</div>
 			<div class="nav navbar-nav navbar-right">
 				<!-- add logout logic-->
-					<a href="logout.do" class="navbar-brand" (click) = "logout()"><strong>Logout</strong></a>
+					<a routerLink="logout.do" class="navbar-brand" (click) = "logout()"><strong>Logout</strong></a>
 			</div>
-		
+		<!-- TODO: look into usehash -->
 	</div>
 </nav>

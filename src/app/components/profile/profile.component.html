@@ -1,3 +1,49 @@
-<p>
-  profile works!
-</p>
+<div class="list-group">
+  <div class="list-group-item">
+      <div class="input-group">
+          <span class="input-group-addon">Username: </span>
+          <input id="usernamefield" [(ngModel)]=loggedUser.username/>
+          <span class="input-group-btn">
+              <button placeholder= "usernameDebug"class="btn btn-default" type="button" (click)="enableFieldUsername()">Enable</button>
+          </span>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <div class="input-group">
+          <span class="input-group-addon">First Name: </span>
+          <input id="firstnamefield" [(ngModel)]=loggedUser.firstName/>
+          <span class="input-group-btn">
+              <button class="btn btn-default" type="button" (click)="enableFieldFirstname()">Enable</button>
+          </span>
+     </div>
+  </div>
+  <div class="list-group-item">
+      <div class="input-group">
+          <span class="input-group-addon">Last Name: </span>
+          <input id="lastnamefield" [(ngModel)]=loggedUser.lastName/>
+          <span class="input-group-btn">
+              <button class="btn btn-default" type="button" (click)="enableFieldLastname()">Enable</button>
+          </span>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <div class="input-group">
+        <span class="input-group-addon">Email: </span>
+        <input id="emailfield" [(ngModel)]=loggedUser.email/>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="enableFieldEmail()">Enable</button>
+        </span>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <div class="input-group">
+          <span class="input-group-addon">Role: </span>
+          <p id="role">{{loggedUser.role}}</p>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <div class="input-group">
+        <button  class="btn btn-md btn-block" (click)="updateProfile()">Update</button>
+      </div>
+  </div>
+</div>
