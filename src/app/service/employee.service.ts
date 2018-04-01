@@ -5,7 +5,7 @@ import { HttpParams } from '@angular/common/http';
 
 
 import 'rxjs/Rx';
-import { User } from '../models/user.model';
+import { Employee } from '../models/employee.model';
 
 
 @Injectable()
@@ -17,17 +17,26 @@ export class EmployeeService {
     return Observable.throw(error.statusText);
   }
 
-  updateUser(userInfo: User){
+  getInfo(userInfo: Employee): Observable<Employee>{
+    return this.http
+            .post(`http://localhost:8080/ERS/info.do?username=${userInfo.username}`,
+          null, {withCredentials: true})
+          .map((response: Response) => {
+            return <Employee> response.json();
+          })
+          .catch(this.handleError);
+  }
+
+  updateUser(userInfo: Employee): Observable<Employee>{
     //update user info.
     //fix servlet/controller update.do
+    console.log(`service: update user method`);
       return this.http
-            .post(`http://localhost:8080/ERS/update.do?username=${userInfo.username}
-            &firstname=${userInfo.firstName}
-            &lastname=${userInfo.lastName}
-            &email=${userInfo.email}`,
-             null)
+            .post(`http://localhost:8080/ERS/update.do?username=${userInfo.username}&firstname=${userInfo.firstName}&lastname=${userInfo.lastName}&email=${userInfo.email}`,
+             null, {withCredentials: true})
             .map((response: Response ) => {
-              return <User> response.json();
+              console.log(response.json());
+              return <Employee> response.json();
             })
             .catch(this.handleError);
   }

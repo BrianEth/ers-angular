@@ -1,0 +1,56 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <p>Pending Reimbursements </p>
+  </div>
+  <div class = "panel-body">
+
+    <table class="table">
+      <tr>
+        <th>Request #  </th>
+        <th>Username  </th>
+        <th>Amount</th>
+        <th>Description  </th>
+        <th>Date</th>
+        <th>Approve?</th>
+        <th>Deny?</th>
+      </tr>
+      <tr *ngFor="let reimbursement of reimbursements">
+        <td>{{reimbursement.id}}</td>
+        <td>{{reimbursement.requester.username}}</td>
+        <td>{{reimbursement.amount}}</td>
+        <td>{{reimbursement.description}}</td>
+        <td>{{printDate(reimbursement)}}</td>
+        <td>
+            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="approve(id)">Approve</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="deny(id)">Deny</button>
+        </td>
+      </tr>
+
+    </table>
+    
+    <!-- ngfor reimbursements. -->
+    <!--
+    <div class="list-group">
+      <div>
+        <li *ngFor="let reimbursement of reimbursements">
+          <div class="panel-heading">
+          <span>{{print(reimbursement)}}</span>
+          <div class="panel-body">
+            <p>{{printDate(reimbursement)}}</p>
+            <p>Description: {{reimbursement.description}}</p>  
+          </div>
+          </div>
+        </li>
+        
+      </div>
+    </div>-->
+  </div>
+</div> <!--
+<div class ="btn-group" role="group">
+  <button type="button" class="btn btn-default" id="reimbursement.id">Approve</button>
+  <button type="button" class="btn btn-default" id="reimbursement.id">Deny</button>
+</div> -->
+
+

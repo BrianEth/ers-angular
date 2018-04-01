@@ -2,7 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 
 //service
 import { LoginService } from '../../service/login.service';
-import { User } from '../../models/user.model';
+import { Employee } from '../../models/employee.model';
 import { RouterLink, Router } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.router = router;
    }
 
-  public user: User = new User('','','','','',null);
+  public user: Employee = new Employee('','','','','',null);
 
   ngOnInit() {
   }

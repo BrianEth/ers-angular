@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReimbursementService } from '../../service/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
 import { ReimbursementType } from '../../models/reimbursementType.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-submit',
@@ -11,11 +12,13 @@ import { ReimbursementType } from '../../models/reimbursementType.model';
 export class SubmitComponent implements OnInit {
 
   types = ['Other','Course','Certification','Travel'];
+  
 
   constructor(private reimbursementService: ReimbursementService) { }
 
   public reimbursement: Reimbursement = new Reimbursement(0,0.00,'',null,new ReimbursementType(1,this.types[0]));
-
+  //public reimbursement: Reimbursement = null;
+  clientMessage = "";
   submitted = false;
 
   userFirstName = window.sessionStorage.getItem('userFirstName');
@@ -35,6 +38,15 @@ export class SubmitComponent implements OnInit {
       .subscribe(
         mappedReimbursement => {
           console.log(mappedReimbursement);
+          if(mappedReimbursement.message =="Request Submitted."){
+            console.log("successful")
+            this.clientMessage=mappedReimbursement.message;
+            this.reimbursement = null;
+            this.submitted = true;
+            //routerLink="/main";
+          } else {
+            console.log("failed");
+          }
         }
         
       )

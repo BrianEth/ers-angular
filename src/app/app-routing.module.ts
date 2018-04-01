@@ -10,6 +10,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ResolvedComponent } from './components/resolved/resolved.component';
 import { PendingComponent } from './components/pending/pending.component';
+import { AllPendingComponent } from './components/all-pending/all-pending.component';
+import { AllResolvedComponent } from './components/all-resolved/all-resolved.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +24,10 @@ export const routes: Routes = [
   { path: 'history', component: HistoryComponent},
   { path: 'resolved', component: ResolvedComponent},
   { path: 'pending', component: PendingComponent},
+  { path: 'allResolved', component: AllResolvedComponent},
+  { path: 'allPending', component: AllPendingComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'allEmployees', component: AllEmployeesComponent},
   
   { path: '**', redirectTo: '/login' }
 ];

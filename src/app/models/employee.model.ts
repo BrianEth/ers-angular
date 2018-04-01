@@ -1,7 +1,7 @@
 import { EmployeeRole } from "./employeeRole.model";
 
 
-export class User {
+export class Employee {
     username: string;
     password: string;
     firstName: string;

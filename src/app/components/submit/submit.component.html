@@ -1,17 +1,15 @@
 
 <div>
     <div>
-      <div>
-        Please indicate the amount you want to request is reimbursed.
+      <div class = "list-group-item">
+       <p> Please indicate the amount you want to request is reimbursed.</p>
         <input [(ngModel)]=reimbursement.amount placeholder="amount" required/>
       </div>
-      <div>
-        Please give a brief description of why this should be reimbursed.
+      <div class = "list-group-item">
+        <p>Please give a brief description of why this should be reimbursed. </p>
         <input [(ngModel)]=reimbursement.description placeholder="description" required/>
       </div>
-      <div>
-        TODO: drop-down for different types.
-
+      <div class = "list-group-item">
         <label for="type">Reimbursement Type</label>
           <select [(ngModel)]=reimbursement.type class="form-control" id="type" required>
             <option  *ngFor="let ty of types" [value]="ty">{{ty}}</option>
@@ -19,8 +17,14 @@
            <!-- TODO: delete. -->
 
       </div>
+      <div class = "list-group-item">
         <button type="submit" class="btn btn-success" (click)=trySubmit()>Submit</button>
-      
+      </div>
     </div>
-    Currently logged in as: {{userFirstName}}
+    <div class = "list-group-item" *ngIf="submitted">
+      {{clientMessage}}
+    </div>
+    <div class = "panel-footer">
+      Currently logged in as: {{userFirstName}}
+    </div>
 </div>

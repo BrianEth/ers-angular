@@ -8,5 +8,15 @@ import { Component } from '@angular/core';
 export class MainComponent {
     title = 'Welcome to Reimbursement Services';
     userFirstName = window.sessionStorage.getItem('userFirstName');
-    //image = 'assets/images/angular.png';
+    userRole = window.sessionStorage.getItem('userRole');
+    isManager=false;
+    
+
+    ngOnInit(){
+      if(this.userRole == "MANAGER") {
+          this.isManager=true;
+      } else {
+        this.isManager=false;
+      }
+    }
 }

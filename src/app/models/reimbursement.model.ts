@@ -1,16 +1,17 @@
 import { ReimbursementStatus } from "./reimbursementStatus.model";
 import { ReimbursementType } from "./reimbursementType.model";
+import { Employee } from "./employee.model";
 
 
 export class Reimbursement {
     id: number;
-    //requested
-    //resolved
+    requested: any;
+    resolved: any;
     amount: number;
     description: string;
-    //receipt
-    //requester
-    //approver
+    receipt: Object;
+    requester : Employee;
+    approver: Employee;
     status: ReimbursementStatus;
     type: ReimbursementType;
 
@@ -21,6 +22,10 @@ export class Reimbursement {
         this.description = description;
         this.status = status;
         this.type = type;
+    }
+
+    print() : string {
+        return `Reimbursement (${this.id})`;
     }
 
 }

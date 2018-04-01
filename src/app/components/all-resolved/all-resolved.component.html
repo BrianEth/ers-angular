@@ -1,0 +1,51 @@
+<div>
+  <div class="panel-heading">
+    <p>Finalized Reimbursement History</p>
+  </div>
+  <div class = "panel-body">
+
+      <table class="table">
+          <tr>
+            <th>Request #  </th>
+            <th>Username  </th>
+            <th>Amount</th>
+            <th>Description  </th>
+            <th>Date Req</th>
+            <th>Status</th>
+            <th>Date Resolved</th>
+            <th>Resolver</th>
+          </tr>
+          <tr *ngFor="let reimbursement of reimbursements">
+            <td>{{reimbursement.id}}</td>
+            <td>{{reimbursement.requester.username}}</td>
+            <td>{{reimbursement.amount}}</td>
+            <td>{{reimbursement.description}}</td>
+            <td>{{printDate(reimbursement)}}</td>
+            <td>{{reimbursement.status.status}}</td>
+            <td>{{printDateResolved(reimbursement)}}</td>
+            <td>{{reimbursement.approver.username}}</td>
+          </tr>
+    
+        </table>
+
+
+
+
+    <!-- ngfor reimbursements. -->
+    <!--
+    <div class="list-group">
+      <div class="list-group-item">
+        <li *ngFor="let reimbursement of reimbursements">
+          <span>{{print(reimbursement)}}</span>
+          <div class="list-group-item list-group-demo">
+            <p>Requested: {{printDate(reimbursement)}}</p>
+            <p>Description: {{reimbursement.description}}</p>
+            <p>Status: {{reimbursement.status.status}}</p>
+            <p>{{printDateResolved(reimbursement)}}</p>
+          </div>
+        </li>
+        
+      </div> 
+    </div> -->
+  </div>
+</div>

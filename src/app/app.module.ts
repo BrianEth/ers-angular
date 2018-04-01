@@ -22,6 +22,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginService } from './service/login.service';
 import { ReimbursementService } from './service/reimbursement.service';
 import { EmployeeService } from './service/employee.service';
+
+//auth
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NoopInterceptor } from './components/auth/noop.interceptor';
+import { AllPendingComponent } from './components/all-pending/all-pending.component';
+import { AllResolvedComponent } from './components/all-resolved/all-resolved.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
+
 //import { NoopInterceptor } from '@angular/common/http';
 
 //import { AuthInterceptor } from './service/auth.service';
@@ -38,7 +48,11 @@ import { EmployeeService } from './service/employee.service';
     PendingComponent,
     ResolvedComponent,
    // NoopInterceptor,
-    ProfileComponent
+    ProfileComponent,
+   AllPendingComponent,
+   AllResolvedComponent,
+   RegisterComponent,
+   AllEmployeesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +61,7 @@ import { EmployeeService } from './service/employee.service';
     HttpModule
   ],
   
-  providers: [LoginService, ReimbursementService, EmployeeService],
+  providers: [LoginService, ReimbursementService, EmployeeService, { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
