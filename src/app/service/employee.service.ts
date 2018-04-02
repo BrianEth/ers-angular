@@ -42,6 +42,7 @@ export class EmployeeService {
   }
 
   logout() {
+    console.log("logout-service");
     this.http
         .get(`http://localhost:8080/ERS/logout.do?`,
       {withCredentials: true})

@@ -51,8 +51,8 @@ export class SubmitComponent implements OnInit {
      console.log(`type: ${typeElement}`)
     console.log(`isnum: ${isNumber(this.reimbursement.amount)} : ${this.reimbursement.amount}`);
     console.log(`desc: ${this.reimbursement.description}`)
-    console.log(`type: ${this.reimbursement.type.type}`)
-      if(this.reimbursement.amount > 0 && this.reimbursement.description && this.reimbursement.type.type){
+    console.log(`type: ${this.reimbursement.type}`)
+      if(this.reimbursement.amount > 0 && this.reimbursement.description && this.reimbursement.type){
       this.reimbursementService.submitReimbursement(this.reimbursement.amount, this.reimbursement.description, this.reimbursement.type)
       .subscribe(
         mappedReimbursement => {
