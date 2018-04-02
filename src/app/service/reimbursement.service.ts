@@ -72,6 +72,20 @@ export class ReimbursementService {
             });
 
    }
+
+   public getUserPendingHistory(id: number): Observable<Reimbursement[]> {
+    return this.http
+    .post(`http://localhost:8080/ERS/history.do?requestType=searchPending&id=${id}`,
+    null,{withCredentials: true })
+    .map((response: Response) => {
+      console.log("response " +response.json());
+      return <Reimbursement[]> response.json();
+    });
+
+}
+
+
+
    public getFinalizedHistory(): Observable<Reimbursement[]> {
 
     return this.http
@@ -98,9 +112,9 @@ export class ReimbursementService {
 
    }
 
-   public finalizeReimbursement(id: number, status: number): Observable<String> {
+   public finalizeReimbursement(id: number, statusNumber: number, status: string): Observable<String> {
      return this.http
-            .post(`http://localhost:8080/ERS/finalize.do?id=${id}&status=${status}`,
+            .post(`http://localhost:8080/ERS/finalize.do?id=${id}&statusNum=${statusNumber}&status=${status}`,
             null,{withCredentials: true })
             .map((response: Response) => {
               return response.json();

@@ -2,8 +2,17 @@
   <div class="panel-heading">
     <p>Finalized Reimbursement History</p>
   </div>
+  <div class="col-lg-6">
+      <div class="input-group-btn">
+          <label for="type">Select User to see specific requests</label>
+          <select [(ngModel)]=input class="form-control" id="search" required>
+            <option  *ngFor="let emp of employees; trackBy: trackEmployee" [value]="emp">{{emp.username}}</option>
+          </select>
+          <button id="searchButton" class="btn btn-default" type="button" (click)=search(i)>Search</button>
+          <button class="btn btn-default" type="button" (click)=reset()>Reset</button>
+      </div>
+    </div>
   <div class = "panel-body">
-
       <table class="table">
           <tr>
             <th>Request #  </th>

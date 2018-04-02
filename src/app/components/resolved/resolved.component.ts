@@ -4,6 +4,7 @@ import { EmployeeRole } from '../../models/employeeRole.model';
 import { ReimbursementService } from '../../service/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
 import { ReimbursementType } from '../../models/reimbursementType.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -15,8 +16,12 @@ export class ResolvedComponent implements OnInit {
     window.sessionStorage.getItem('userFirstName'),
     window.sessionStorage.getItem('userLastName'),
     window.sessionStorage.getItem('userEmail'),
-    new EmployeeRole(1,window.sessionStorage.getItem('userRole')));
-  constructor(private reimbursementService: ReimbursementService) {
+    new EmployeeRole(1,window.sessionStorage.getItem('userRole')),0);
+    userFirstName = window.sessionStorage.getItem('userFirstName');
+    userRole = window.sessionStorage.getItem('userRole');
+    isManager=false;
+    
+  constructor(private reimbursementService: ReimbursementService, private router: Router) {
 
    }
 
@@ -24,6 +29,14 @@ export class ResolvedComponent implements OnInit {
   reimbursements: Reimbursement[];
 
   ngOnInit() {
+    if(this.userRole == "MANAGER") {
+      this.isManager=true;
+  } else {
+    this.isManager=false;
+  }
+  if(!this.userFirstName || this.isManager){
+    this.router.navigate(['/denied']);
+  }
     this.getHistory();
   }
 

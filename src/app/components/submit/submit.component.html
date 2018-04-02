@@ -10,7 +10,7 @@
         <input [(ngModel)]=reimbursement.description placeholder="description" required/>
       </div>
       <div class = "list-group-item">
-        <label for="type">Reimbursement Type</label>
+        <label for="type">Reimbursement Type (default is 'Other')</label>
           <select [(ngModel)]=reimbursement.type class="form-control" id="type" required>
             <option  *ngFor="let ty of types" [value]="ty">{{ty}}</option>
           </select>
@@ -21,7 +21,7 @@
         <button type="submit" class="btn btn-success" (click)=trySubmit()>Submit</button>
       </div>
     </div>
-    <div class = "list-group-item" *ngIf="submitted">
+    <div class = "list-group-item">
       {{clientMessage}}
     </div>
     <div class = "panel-footer">

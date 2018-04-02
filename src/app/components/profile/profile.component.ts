@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeRole } from '../../models/employeeRole.model';
 import { EmployeeService } from '../../service/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,26 +11,32 @@ import { EmployeeService } from '../../service/employee.service';
 })
 export class ProfileComponent implements OnInit {
     loggedUser: Employee = new Employee(window.sessionStorage.getItem('loggedUser'),
-                        '','','','',new EmployeeRole(1,window.sessionStorage.getItem('userRole')));
+                        '','','','',new EmployeeRole(1,window.sessionStorage.getItem('userRole')),0);
     oldInfo: Employee;
-   /* = new Employee(window.sessionStorage.getItem('loggedUser'),'',
-    window.sessionStorage.getItem('userFirstName'),
-    window.sessionStorage.getItem('userLastName'),
-    window.sessionStorage.getItem('userEmail'),
-    new EmployeeRole(1,window.sessionStorage.getItem('userRole')));*/
-
-    //disable fields by default so user doesnt accidently alter info.
+    userFirstName = window.sessionStorage.getItem('userFirstName');
+    userRole = window.sessionStorage.getItem('userRole');
+    isManager=false;
     
-  constructor(private employeeService: EmployeeService) {
+    
+  constructor(private employeeService: EmployeeService, private router: Router) {
+    this.router=router;
     //console.log(this.loggedUser.employeeRole); 
   }
 
   ngOnInit() {
+    if(this.userRole == "MANAGER") {
+      this.isManager=true;
+  } else {
+    this.isManager=false;
+  }
+  if(!this.userFirstName){
+    this.router.navigate(['/denied']);
+  }
     this.disableFields();
     this.getInfo();
 
     this.oldInfo = new Employee(this.loggedUser.username, '',
-    this.loggedUser.firstName, this.loggedUser.lastName,this.loggedUser.email,this.loggedUser.employeeRole);
+    this.loggedUser.firstName, this.loggedUser.lastName,this.loggedUser.email,this.loggedUser.employeeRole,0);
 
   }
 

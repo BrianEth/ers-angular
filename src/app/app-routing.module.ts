@@ -14,6 +14,7 @@ import { AllPendingComponent } from './components/all-pending/all-pending.compon
 import { AllResolvedComponent } from './components/all-resolved/all-resolved.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
+import { DeniedComponent } from './components/denied/denied.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'allPending', component: AllPendingComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'allEmployees', component: AllEmployeesComponent},
+  { path: 'denied', component: DeniedComponent},
   
   { path: '**', redirectTo: '/login' }
 ];

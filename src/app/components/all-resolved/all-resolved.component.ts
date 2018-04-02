@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReimbursementService } from '../../service/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-resolved',
@@ -9,12 +10,25 @@ import { Reimbursement } from '../../models/reimbursement.model';
 })
 export class AllResolvedComponent implements OnInit {
 
-  constructor(private reimbursementService: ReimbursementService) { }
+  userFirstName = window.sessionStorage.getItem('userFirstName');
+    userRole = window.sessionStorage.getItem('userRole');
+    isManager=false;
+  constructor(private reimbursementService: ReimbursementService, private router: Router) {
+    this.router=router;
+   }
 
 
   reimbursements: Reimbursement[];
 
   ngOnInit() {
+    if(this.userRole == "MANAGER") {
+      this.isManager=true;
+  } else {
+    this.isManager=false;
+  }
+  if(!this.userFirstName){
+    this.router.navigate(['/denied']);
+  }
     this.getHistory();
   }
 

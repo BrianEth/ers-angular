@@ -31,6 +31,7 @@ import { AllPendingComponent } from './components/all-pending/all-pending.compon
 import { AllResolvedComponent } from './components/all-resolved/all-resolved.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
+import { DeniedComponent } from './components/denied/denied.component';
 
 //import { NoopInterceptor } from '@angular/common/http';
 
@@ -52,7 +53,8 @@ import { AllEmployeesComponent } from './components/all-employees/all-employees.
    AllPendingComponent,
    AllResolvedComponent,
    RegisterComponent,
-   AllEmployeesComponent
+   AllEmployeesComponent,
+   DeniedComponent
   ],
   imports: [
     BrowserModule,

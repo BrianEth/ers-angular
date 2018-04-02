@@ -2,9 +2,21 @@
   <div class="panel-heading">
     <p>Pending Reimbursements </p>
   </div>
-  <div class = "panel-body">
 
-    <table class="table">
+  <div class="col-lg-6">
+    <div class="input-group-btn">
+        <label for="type">Select User to see specific requests</label>
+        <select [(ngModel)]=input class="form-control" id="search" required>
+          <option  *ngFor="let emp of employees; trackBy: trackEmployee" [value]="emp">{{emp.username}}</option>
+        </select>
+        <button id="searchButton" class="btn btn-default" type="button" (click)=search(i)>Search</button>
+        <button class="btn btn-default" type="button" (click)=reset()>Reset</button>
+    </div>
+  </div>
+
+  <div class = "panel-body">
+    <p id="clientMessage">{{clientMessage}}</p>
+    <table class="table" id="reimbursementList">
       <tr>
         <th>Request #  </th>
         <th>Username  </th>
@@ -14,43 +26,22 @@
         <th>Approve?</th>
         <th>Deny?</th>
       </tr>
-      <tr *ngFor="let reimbursement of reimbursements">
+      <tr *ngFor="let reimbursement of reimbursements; let i = index">
         <td>{{reimbursement.id}}</td>
         <td>{{reimbursement.requester.username}}</td>
         <td>{{reimbursement.amount}}</td>
         <td>{{reimbursement.description}}</td>
         <td>{{printDate(reimbursement)}}</td>
+        <!--<td>{{i}}</td>-->
         <td>
-            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="approve(id)">Approve</button>
+            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="approve(i)">Approve</button>
         </td>
         <td>
-            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="deny(id)">Deny</button>
+            <button type="button" class="btn btn-default" id="reimbursement.id" (click)="deny(i)">Deny</button>
         </td>
       </tr>
 
     </table>
-    
-    <!-- ngfor reimbursements. -->
-    <!--
-    <div class="list-group">
-      <div>
-        <li *ngFor="let reimbursement of reimbursements">
-          <div class="panel-heading">
-          <span>{{print(reimbursement)}}</span>
-          <div class="panel-body">
-            <p>{{printDate(reimbursement)}}</p>
-            <p>Description: {{reimbursement.description}}</p>  
-          </div>
-          </div>
-        </li>
-        
-      </div>
-    </div>-->
   </div>
-</div> <!--
-<div class ="btn-group" role="group">
-  <button type="button" class="btn btn-default" id="reimbursement.id">Approve</button>
-  <button type="button" class="btn btn-default" id="reimbursement.id">Deny</button>
-</div> -->
-
+</div>
 

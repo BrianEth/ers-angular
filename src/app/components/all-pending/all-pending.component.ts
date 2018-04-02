@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Reimbursement } from '../../models/reimbursement.model';
 import { ReimbursementService } from '../../service/reimbursement.service';
+import { Router } from '@angular/router';
+import { EmployeeService } from '../../service/employee.service';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-all-pending',
@@ -9,13 +12,32 @@ import { ReimbursementService } from '../../service/reimbursement.service';
 })
 export class AllPendingComponent implements OnInit {
 
-  constructor(private reimbursementService: ReimbursementService) { }
-
+  constructor(private reimbursementService: ReimbursementService, private employeeService: EmployeeService, private router: Router) {
+    this.router=router;
+   }
+  userFirstName = window.sessionStorage.getItem('userFirstName');
+    userRole = window.sessionStorage.getItem('userRole');
+    isManager=false;
+    input;
   reimbursements: Reimbursement[];
+  employees: Employee[];
   message: string;
+  clientMessage: string;
 
   ngOnInit() {
+    this.getEmployees();
+    if(this.userRole == "MANAGER") {
+      this.isManager=true;
+  } else {
+    this.router.navigate(['/denied'])
+    this.isManager=false;
+  }
+  if(!this.userFirstName){
+    this.router.navigate(['/denied']);
+  }
     this.getHistory();
+    this.clientMessage = '';
+
   }
 
   public print(reimbursement: Reimbursement) : string {
@@ -37,29 +59,82 @@ export class AllPendingComponent implements OnInit {
         error => console.log(`error: ${error}`),
         console.log(`mapped reimbursements: ${mappedReimbursements[0].id}`);
         console.log(`reimbursement Array: ${this.reimbursements}`);
-        
+        document.getElementById("reimbursementList").removeAttribute("disabled"); 
       }
     )
   
   }
 
-  approve(id: number): void {
-    console.log("id in approve:   "+id);
-    // this.reimbursementService.finalizeReimbursement(id, 3)
-    // .subscribe(
-    //   mappedMessage => {
-    //     this.message = <string> mappedMessage;
-    //   }
-    // )
+  getEmployees() {
+    this.employeeService.allEmployees()
+    .subscribe(
+      mappedEmployees => {
+        this.employees=<Employee[]> mappedEmployees;
+      }
+    )
   }
 
-  deny(id: number): void {
-    this.reimbursementService.finalizeReimbursement(id, 2)
+  search(index: number) {
+    document.getElementById("search").setAttribute("disabled","disabled");
+    document.getElementById("searchButton").setAttribute("disabled","disabled");
+
+    console.log(`input: ${index}`); /*
+    this.reimbursementService.getUserPendingHistory(this.employees[index].id)
+    .subscribe( 
+      mappedReimbursements => {
+        this.reimbursements = <Reimbursement[]> mappedReimbursements,
+        error => console.log(`error: ${error}`),
+        document.getElementById("reimbursementList").removeAttribute("disabled"); 
+      }
+    ) */
+
+  }
+
+  trackEmployee(index, employee) {
+    console.log(`index: ${index} ${employee.username}`);
+    return employee.id;
+  }
+
+
+  reset() {
+    this.input='';
+    document.getElementById("search").removeAttribute("disabled");
+    document.getElementById("searchButton").removeAttribute("disabled");
+    this.getHistory();
+  }
+
+
+  approve(index: number): void {
+    let id = this.reimbursements[index].id;
+    console.log("id in approve: "+id);
+    this.clientMessage =`Approving Reimbursement #${id}, Please Wait.`;
+     this.reimbursementService.finalizeReimbursement(id, 3, 'APPROVED')
+     .subscribe(
+       mappedMessage => {
+         this.message = <string> mappedMessage;
+         console.log(this.message);
+         this.clientMessage =`Reimbursement #${id} is now Approved.`;
+         this.getHistory();
+       }
+    )
+  }
+
+  deny(index: number): void {
+    let id = this.reimbursements[index].id;
+    console.log("id in deny: " + id)
+    this.clientMessage =`Declining Reimbursement #${id}, Please Wait.`;
+    this.reimbursementService.finalizeReimbursement(id, 2, 'DECLINED')
     .subscribe(
       mappedMessage => {
         this.message = <string> mappedMessage;
+        this.clientMessage =`Reimbursement #${id} is now Declined.`;
+        this.getHistory();
       }
     )
+  }
+
+  makeUserWait() {
+    document.getElementById("reimbursementList").setAttribute("disabled","disabled");
   }
 
 

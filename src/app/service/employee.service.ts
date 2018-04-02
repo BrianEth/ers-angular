@@ -40,4 +40,21 @@ export class EmployeeService {
             })
             .catch(this.handleError);
   }
+
+  logout() {
+    this.http
+        .get(`http://localhost:8080/ERS/logout.do?`,
+      {withCredentials: true})
+      .catch(this.handleError);
+  }
+
+  allEmployees(): Observable<Employee[]> {
+    return this.http
+            .get(`http://localhost:8080/ERS/allEmployees.do`,
+          {withCredentials: true})
+          .map((response: Response) => {
+            return <Employee> response.json();
+          })
+          .catch(this.handleError);
+  }
 }

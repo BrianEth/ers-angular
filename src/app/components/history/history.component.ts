@@ -15,7 +15,7 @@ export class HistoryComponent implements OnInit {
     window.sessionStorage.getItem('userFirstName'),
     window.sessionStorage.getItem('userLastName'),
     window.sessionStorage.getItem('userEmail'),
-    new EmployeeRole(1,window.sessionStorage.getItem('userRole')));
+    new EmployeeRole(1,window.sessionStorage.getItem('userRole')),0);
   constructor(private reimbursementService: ReimbursementService) {
 
    }

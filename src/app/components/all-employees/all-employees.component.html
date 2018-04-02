@@ -1,3 +1,25 @@
-<p>
-  all-employees works!
-</p>
+<div>
+    <div class="panel-heading">
+      <p>List of all employees</p>
+    </div>
+    <div class = "panel-body">
+  
+        <table class="table">
+            <tr>
+              <th>ID #  </th>
+              <th>Username  </th>
+              <th>First name</th>
+              <th>Last name  </th>
+              <th>email</th>
+            </tr>
+            <tr *ngFor="let employee of employees">
+              <td>{{employee.id}}</td>
+              <td>{{employee.username}}</td>
+              <td>{{employee.firstName}}</td>
+              <td>{{employee.lastName}}</td>
+              <td>{{employee.email}}</td>
+            </tr>
+      
+          </table>
+    </div>
+  </div>

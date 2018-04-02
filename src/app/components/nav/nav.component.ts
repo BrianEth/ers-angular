@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EmployeeService } from '../../service/employee.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +8,14 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+  constructor(private employeeService: EmployeeService) {}
+
+
   logout() :void {
-    window.sessionStorage.setItem('loggedUser', null);
-    window.sessionStorage.setItem('userFirstName', null);
+    window.sessionStorage.setItem('loggedUser', '');
+    window.sessionStorage.setItem('userFirstName', '');
+    window.sessionStorage.setItem('userRole', '');
+    this.employeeService.logout();
   }
 
 }

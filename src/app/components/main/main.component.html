@@ -1,4 +1,4 @@
-<div>
+<div class="backdrop">
     <div class="panel-heading">
         <span class="label label-default label-center">{{title}}</span>
     </div>
@@ -14,10 +14,10 @@
         <div class="list-group-item" *ngIf=!isManager>
             <button class="btn btn-md btn-block" routerLink="/resolved">View Resolved Reimbursements</button>
         </div>
-
+        <!--
         <div class="list-group-item" *ngIf=isManager>
             <button class ="btn btn-md btn-block"routerLink = "/register">Register New Employee</button>
-        </div>
+        </div>-->
         <div class="list-group-item" *ngIf=isManager>
             <button class ="btn btn-md btn-block" routerLink = "/allEmployees">View All Employees</button>
         </div>
@@ -36,6 +36,5 @@
     </div>
     <div class="panel-footer">
         Currently logged in as: {{userFirstName}}
-        isManager: {{isManager}}
     </div>
 </div>
